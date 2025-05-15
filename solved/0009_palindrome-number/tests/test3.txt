@@ -1,0 +1,2 @@
+Input: x = 10
+Output: False

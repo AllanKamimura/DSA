@@ -1,0 +1,2 @@
+Input: x = 313
+Output: True

@@ -1,0 +1,2 @@
+Input: x = 121
+Output: True
