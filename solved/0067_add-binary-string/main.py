@@ -43,18 +43,14 @@ class Solution:
         a = "0" + a
         b = "0" + b
 
-        # start from the end
-        a = a[::-1]
-        b = b[::-1]
-
         i = 0
 
         answer = ""
         remainder = False
 
         while i <= max_size:
-            x = a[i]
-            y = b[i]
+            x = a[max_size - i]
+            y = b[max_size - i]
             remainder, value = self.baseSum(x, y, remainder)
 
             answer = value + answer  # add new digit to the right
