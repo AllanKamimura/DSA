@@ -1,0 +1,2 @@
+Input: x = 9
+Output: 3

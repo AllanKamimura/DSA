@@ -1,0 +1,2 @@
+Input: x = 4
+Output: 2
