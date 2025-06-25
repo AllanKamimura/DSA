@@ -32,7 +32,7 @@ The input is generated such that answer[i] is guaranteed to fit in a 32-bit inte
 
 ### Precomputed prefix and suffix arrays
 
-#### Explaination
+#### Explanation
 
 We start by creating 2 auxiliaries array, prefix and suffix.
 The prefix array has the property where,
@@ -68,7 +68,7 @@ prefix * sufix = [bcd, acd, abd, abc]
 
 ### In-place prefix and suffix arrays
 
-#### Explaination
+#### Explanation
 
 The same as before, but instead of creating separated arrays,
 we just compute the same values using the output array directly.

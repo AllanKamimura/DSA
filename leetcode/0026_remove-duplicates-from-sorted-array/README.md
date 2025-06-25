@@ -39,7 +39,7 @@ nums is sorted in non-decreasing order.
 
 ### Two pointers approach
 
-#### Explaination
+#### Explanation
 
 We start 2 pointers, left and right.
 The first is going to keep track of the unique number,

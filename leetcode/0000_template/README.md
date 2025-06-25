@@ -21,7 +21,7 @@ Explanation:
 
 ## Solution
 
-#### Explaination
+#### Explanation
 
 
 

@@ -29,7 +29,7 @@ Explanation: In this case, no transactions are done and the max profit = 0.
 
 ### Two pointers approach
 
-#### Explaination
+#### Explanation
 We initialize 2 pointers, left and right, and a profit variable.
 The left pointer is going to keep track of the lowest price found so far,
 while the right pointer is going to "explore" the rest of the list.

@@ -30,7 +30,7 @@ Output: 1
 
 ### Boyer-Moore Voting Algorithm
 
-#### Explaination
+#### Explanation
 Since we know that the majority number appears at least (n//2 + 1) times in the list, all the other numbers are going to appear at most (n//2) times. So the algorithm is going to cancel out all candidates, but the one that appears at least (n//2 + 1).
 
 

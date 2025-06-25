@@ -38,7 +38,7 @@ Explanation: The triplet (2, 3, 5) is valid because nums[3] == 1 < nums[4] == 5 
 
 ### Greedy Capture Approach
 
-#### Explaination
+#### Explanation
 
 We create 2 variables, `first` and `second`, to keep track of possible candidates for `num_i` and `num_j`.
 

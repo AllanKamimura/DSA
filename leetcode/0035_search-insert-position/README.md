@@ -44,7 +44,7 @@ break
 return i = 2
 ```
 
-#### Explaination
+#### Explanation
 
 While the value is not found or the 2 points are not on the same number,
 get 1 step closer to the desired value, until it is found.

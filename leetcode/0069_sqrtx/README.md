@@ -44,7 +44,7 @@ x = 8
 # return 2
 ```
 
-#### Explaination
+#### Explanation
 
 We want to find a value where mid = sqrt(x) using a binary search over all integers.
 I choose to compare mid < (x // mid) instead of mid ** 2 < x to avoid a potential integer overflow.

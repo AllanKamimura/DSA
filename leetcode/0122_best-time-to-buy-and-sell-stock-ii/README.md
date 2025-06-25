@@ -41,7 +41,7 @@ Explanation: There is no way to make a positive profit, so we never buy the stoc
 
 ### 2 pointers approach
 
-#### Explaination
+#### Explanation
 We start 2 pointers, today and tomorrow. 
 Today is going to point to the current price,
 while tomorrow is going to point to the price in the next day.

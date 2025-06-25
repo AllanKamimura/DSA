@@ -36,7 +36,7 @@ rotate 2 steps to the right: [3,99,-1,-100]
 
 ### In-place swaps
 
-#### Explaination
+#### Explanation
 
 Just swap the balues 1 by 1. 
 Each `curr_index` points to a `next_index` that is k steps ahead.
@@ -75,7 +75,7 @@ k = 2
 
 ### Split and Concatenate
 
-#### Explaination
+#### Explanation
 
 Just split the list at k from the end,
 then concatenate the first half +  second half
@@ -103,7 +103,7 @@ k_to_the_end + second_half = [3, 99, -1, -100]
 
 ### Reverse/Reverse
 
-#### Explaination
+#### Explanation
 
 Perform a sequence of clever reverses.
 

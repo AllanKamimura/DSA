@@ -37,7 +37,7 @@ i = 0 # -> left = 1
 j = 3 # -> right = 1
 ```
 
-#### Explaination
+#### Explanation
 
 We start 2 pointers, one at the start and one at the end.
 At each step, we check if the digit it points are the same,

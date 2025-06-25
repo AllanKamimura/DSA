@@ -43,7 +43,7 @@ Explanation: There is no subarray filled with 0. Therefore, we return 0.
 
 ### Two pointers approach
 
-#### Explaination
+#### Explanation
 
 We initialize 2 pointers, `left` and `right`.
 The `right` point has 2 functions:
