@@ -1,0 +1,2 @@
+Input: s = "axc", t = "ahbgdc"
+Output: False
