@@ -1,0 +1,2 @@
+Input: s = "race a car"
+Output: False
