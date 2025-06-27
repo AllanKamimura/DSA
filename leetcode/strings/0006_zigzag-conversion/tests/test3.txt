@@ -1,0 +1,2 @@
+Input: s = "A", numRows = 1
+Output: "A"
