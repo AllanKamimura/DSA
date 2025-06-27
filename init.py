@@ -45,7 +45,9 @@ def main():
     readme_path = os.path.join(target_dir, "README.md")
     with open(readme_path, "w") as f:
         f.write(f"# {num}. {slug.replace('-', ' ').title()}\n\n")
-        f.write("<!-- Add problem description here -->\n\n")
+        leetcode_url = f"https://leetcode.com/problems/{slug}/description/"
+        f.write(f"[🔗 LeetCode Link]({leetcode_url})\n\n")
+        # f.write("<!-- Add problem description here -->\n\n")
         f.write(open(os.path.join(template_dir, "README.md")).read())
 
     print(f"Created {target_dir} from template.")
