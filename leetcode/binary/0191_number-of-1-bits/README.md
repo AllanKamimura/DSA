@@ -33,7 +33,7 @@ return counter = 3
 
 #### Time Complexity
 
-- O(n) -> We transverse the array a single time.
+- O(1) -> All opertations are O(1) and we run it 32 times (for each bit). 
 
 #### Space Complexity
 
