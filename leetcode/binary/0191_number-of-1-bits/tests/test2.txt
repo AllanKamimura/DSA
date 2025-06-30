@@ -1,0 +1,2 @@
+Input: n = 128
+Output: 1
