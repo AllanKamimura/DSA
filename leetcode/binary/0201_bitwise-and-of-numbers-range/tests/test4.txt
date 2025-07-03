@@ -1,0 +1,2 @@
+Input: left = 416, right = 436
+Output: 416
