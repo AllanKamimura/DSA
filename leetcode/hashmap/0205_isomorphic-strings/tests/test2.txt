@@ -1,0 +1,2 @@
+Input: s = "foo", t = "bar"
+Output: False

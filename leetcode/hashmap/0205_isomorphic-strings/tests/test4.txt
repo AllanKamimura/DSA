@@ -1,0 +1,2 @@
+Input: s = "badc", t = "baba"
+Output: False
