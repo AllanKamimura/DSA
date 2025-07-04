@@ -1,0 +1,2 @@
+Input: a = 2, b = 3
+Output: 5
