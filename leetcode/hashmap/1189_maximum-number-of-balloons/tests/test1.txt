@@ -1,0 +1,2 @@
+Input: text = "nlaebolko"
+Output: 1

@@ -1,0 +1,2 @@
+Input: text = "leetcode"
+Output: 0
