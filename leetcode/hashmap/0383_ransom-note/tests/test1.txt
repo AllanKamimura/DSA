@@ -1,0 +1,2 @@
+Input: ransomNote = "a", magazine = "b"
+Output: False
