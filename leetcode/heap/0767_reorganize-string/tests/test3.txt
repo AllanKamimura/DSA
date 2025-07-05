@@ -1,0 +1,2 @@
+Input: s = "aaaabbbcc"
+Output: "ababacabc"
