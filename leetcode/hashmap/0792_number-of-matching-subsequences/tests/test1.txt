@@ -1,0 +1,2 @@
+Input: s = "abcde", words = ["a","bb","acd","ace"]
+Output: 3
