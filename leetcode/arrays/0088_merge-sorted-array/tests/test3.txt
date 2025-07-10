@@ -1,0 +1,2 @@
+Input: nums1 = [0], m = 0, nums2 = [1], n = 1
+Output: [1]
