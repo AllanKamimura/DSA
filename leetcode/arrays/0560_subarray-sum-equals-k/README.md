@@ -9,18 +9,18 @@
 #### Explanation
 
 The prefix sum array is the cumulative sum up to that index,
-in such that, prefix[i] is the sum of all elements until index i.
+in such that, prefix[i] is the sum of all elements from index 0 to i-1.
 
 One property of the prefix sum is that,
-`prefix[i:j] = prefix[j] - prefix[i]`.
+The sum of elements from index i to j (inclusive) is `prefix[j+1] - prefix[i]`.
 
-We want to find `K = prefix[j] - prefix[i]`, 
-subarray starting at `i` and ending at `j` in which the sum is `K`.
+We want to find `K = prefix[j+1] - prefix[i]`, 
+subarray starting at `i` and ending at `j+1` in which the sum is `K`.
 
-`K = prefix[j] - prefix[i] => prefix[i] = prefix[j] - K`
+`K = prefix[j+1] - prefix[i] => prefix[i] = prefix[j+1] - K`
 
-So given that we know the value of `prefix[j]`,
-the problem now is to know how many `i`s before `j` exists.
+So given that we know the value of `prefix[j+1]`,
+the problem now is to know how many `i`s before `j+1` exist.
 For this, we can keep track of the prefix frequency using a hashmap.
 
 To handle the case of subarray that start at index i=0,
@@ -48,4 +48,4 @@ return count = 2
 
 #### Space Complexity
 
-- O(n) -> In the worst case scenario, the sum_frequency has n elements.
+- O(k) -> In the worst case scenario, the sum_frequency has k elements.

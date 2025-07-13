@@ -8,13 +8,18 @@
 
 #### Explanation
 
-The idea is exactly the same as [560. Subarray Sum Equals K](../0560_subarray-sum-equals-k/).
+The idea is very similat to [560. Subarray Sum Equals K](../0560_subarray-sum-equals-k/).
 
-`K = prefix[j] - prefix[i] => prefix[i] = prefix[j] - K`
+The `prefix_sum[j+1]` be the cumulative sum up to index j.
 
-`prefix[i] = prefix[j] - K => mod(prefix[i], k) = mod(prefix[j], k) - mod(K, k) => prefix[i] % k = prefix[j] % k`
+The sum of numbers from i to j (inclusive) is `prefix_sum[j+1]` - `prefix_sum[i]`.
 
-So our problem now is to count for each `j` how many subarrays starting at `i` have the same modulo.
+(prefix_sum[j+1] - prefix_sum[i]) % k → (prefix_sum[j+1] % k) = (prefix_sum[i] % k)
+
+So for each prefix_sum modulo k, we count how many times it has occurred before using a hashmap.
+
+To handle the case of subarrays starting from index 0,
+we initialize `mod_frequency[0] = 1`.
 
 #### Manual Run
 
@@ -41,4 +46,4 @@ return count = 7
 
 #### Space Complexity
 
-- O(n) -> In the worst case scenario, the sum_frequency has n elements.
+- O(k) -> In the worst case scenario, the sum_frequency has k elements.
