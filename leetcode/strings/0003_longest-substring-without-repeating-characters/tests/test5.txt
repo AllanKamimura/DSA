@@ -1,0 +1,2 @@
+Input: s = "qrsvbspk"
+Output: 5
