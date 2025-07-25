@@ -1,0 +1,2 @@
+Input: s = "AABABBA", k = 1
+Output: 4
