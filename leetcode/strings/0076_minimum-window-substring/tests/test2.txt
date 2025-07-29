@@ -1,0 +1,2 @@
+Input: s = "a", t = "a"
+Output: "a"
