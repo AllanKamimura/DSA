@@ -47,3 +47,45 @@ return max_diff = 6
 #### Space Complexity
 
 - O(1) -> We only create integer variables.
+
+### Kadane's Algorithm
+
+#### Explanation-2
+
+The Kadane's Algorithm is very simple.
+
+We iterate over the array
+and compute the current subarray sum.
+
+If this sum is positive, we increase the subarray,
+if it's negative, we start a new subarray at the current position.
+
+#### Manual Run-2
+
+```python
+nums = [-2,1,-3,4,-1,2,1,-5,4]
+```
+
+num | curr_sum | max_sum
+-- | -- | ---
+-2 | -2 | -2
+ 1 |  1 |  1
+-3 | -2 |  1
+ 4 |  4 |  4
+-1 |  3 |  4
+ 2 |  5 |  5
+ 1 |  6 |  6
+-5 |  1 |  6
+ 4 |  5 |  6
+
+```python
+return max_sum = 6
+```
+
+#### Time Complexity-2
+
+- O(n) -> We transverse the array a single time.
+
+#### Space Complexity-2
+
+- O(1) -> We only create integer variables.

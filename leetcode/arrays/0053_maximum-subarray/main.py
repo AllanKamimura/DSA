@@ -3,18 +3,19 @@ from typing import List
 
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
-        max_diff = float("-inf")
+        curr_sum = nums[0]
+        max_sum = curr_sum
 
-        min_sum = 0
-        curr_sum = 0
+        for i in range(1, len(nums)):
+            num = nums[i]
 
-        for num in nums:
-            curr_sum += num
+            if curr_sum > 0:
+                curr_sum += num
 
-            if curr_sum - min_sum > max_diff:
-                max_diff = curr_sum - min_sum
+            else:
+                curr_sum = num
 
-            if curr_sum < min_sum:
-                min_sum = curr_sum
+            if curr_sum > max_sum:
+                max_sum = curr_sum
 
-        return max_diff
+        return max_sum
