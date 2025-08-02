@@ -10,16 +10,16 @@
 
 The core idea is very similar to Kadane's Algorithm.
 
-The problem, basically is to find the `start` and `end` pair.
+The problem, basically, is to find,
+the score of the best sequence that ends at each index i.
 
-At each value we need to decide if:
+The score of each ending is given by:
 
-- We `end` the sequence.
-- We `start` a new sequence
-- Do nothing
+score = (start_value + start_index) + (curr_value - i)
 
-The caveat here is that the score at each point
-is the sum of the value AND index of the point.
+Since for each value, `(curr_value - i)` is fixed,
+we just need to keep track of the maximum
+`(start_value + start_index)` seen so far.
 
 #### Manual Run
 
