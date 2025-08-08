@@ -1,0 +1,2 @@
+Input: listA = [2,6,4], listB = [1,5]
+Output: None

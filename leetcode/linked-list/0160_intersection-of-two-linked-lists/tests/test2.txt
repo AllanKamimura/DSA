@@ -1,0 +1,2 @@
+Input: listA = [1,9,1,2,4], listB = [3,2,4]
+Output: 2
