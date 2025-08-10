@@ -1,0 +1,5 @@
+Input
+["MyLinkedList","addAtTail","get"]
+[[],[1],[0]]
+Output
+[null, null, 1]
