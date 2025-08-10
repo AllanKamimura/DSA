@@ -48,8 +48,94 @@ def parse_leetcode_style_file(filepath):
     return input_data, expected_output
 
 
+def run_datastructures_tests(folder):
+    import ast
+
+    tests_folder = os.path.join(folder, "tests")
+    input_files = sorted(glob.glob(os.path.join(tests_folder, "test*.txt")))
+    if not input_files:
+        print(f"⚠️ No test files found in {tests_folder}")
+        return
+
+    # Load the solution module
+    path = os.path.join(folder, "main.py")
+    spec = importlib.util.spec_from_file_location("solution", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+
+    passed = 0
+    total = 0
+
+    for input_path in input_files:
+        case_id = os.path.basename(input_path).replace("input", "").replace(".txt", "")
+
+        with open(input_path, "r") as f:
+            lines = [line.strip() for line in f if line.strip()]
+
+        # Expecting:
+        # Input
+        # [operations]
+        # [parameters]
+        # Output
+        # [expected_output]
+        try:
+            op_idx = lines.index("Input")
+            out_idx = lines.index("Output")
+
+            def fix_json_literals(s):
+                return (
+                    s.replace("true", "True")
+                    .replace("false", "False")
+                    .replace("null", "None")
+                )
+
+            operations = ast.literal_eval(fix_json_literals(lines[op_idx + 1]))
+            parameters = ast.literal_eval(fix_json_literals(lines[op_idx + 2]))
+            expected_output = ast.literal_eval(fix_json_literals(lines[out_idx + 1]))
+        except Exception as e:
+            print(f"❌ Test {case_id} failed to parse: {e}")
+            continue
+
+        # Get the class by name from the module
+        class_name = operations[0]
+        cls = getattr(module, class_name)
+        obj = cls(*parameters[0])
+        results = [None]  # Constructor always returns None/null
+
+        for op, args in zip(operations[1:], parameters[1:]):
+            method = getattr(obj, op)
+            res = method(*args)
+            # If the method returns None, append None (to match null in expected output)
+            results.append(res if res is not None else None)
+
+        total += 1
+        if results == expected_output:
+            print(f"✅ Test {case_id} passed")
+            passed += 1
+        else:
+            print(f"❌ Test {case_id} failed")
+            print(f"   Operations: {operations}")
+            print(f"   Parameters: {parameters}")
+            print(f"   Expected  : {expected_output}")
+            print(f"   Got       : {results}")
+
+    print(f"\n🧪 Summary: {passed}/{total} tests passed.")
+
+    # Generate LeetCode URL
+    folder_name = os.path.basename(os.path.normpath(folder))
+    _, slug = folder_name.split("_", 1)
+    leetcode_url = f"https://leetcode.com/problems/{slug}/description/"
+
+    print(f"🔗 LeetCode Link: {leetcode_url}\n")
+
+
 def run_all_tests(problem_number):
     folder = find_problem_folder(problem_number)
+    # Special case for datastructures
+    if os.path.normpath(folder).startswith(os.path.normpath("leetcode/datastructures")):
+        run_datastructures_tests(folder)
+        return
+
     tests_folder = os.path.join(folder, "tests")
     solution = load_solution_class(folder)
     method_name = get_last_method(solution)
