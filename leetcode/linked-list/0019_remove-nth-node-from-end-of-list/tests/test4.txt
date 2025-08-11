@@ -1,0 +1,2 @@
+Input: head = [1,2], n = 2
+Output: [2]
