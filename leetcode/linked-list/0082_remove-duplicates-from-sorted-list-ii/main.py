@@ -8,14 +8,14 @@ class ListNode:
 
 
 class Solution:
-    def _entrypoint(self, head: Optional[List[int]]):
+    def _entrypoint(self, head: Optional[List[int]]) -> Optional[List[int]]:
         next_ = None
         for num in head[::-1]:
             next_ = ListNode(num, next_)
 
         return self.deleteDuplicates(next_)
 
-    def linked_list_to_list(self, head):
+    def linked_list_to_list(self, head: ListNode) -> List:
         result = []
         current = head
         while current is not None:
@@ -26,34 +26,22 @@ class Solution:
     def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
         if not head:
             return head
-        fake_head_add = ListNode(-101)
-        fake_head = ListNode(-101, next=fake_head_add)
-        left = head
-        right = left.next
+        fake_head = ListNode(-101, next=head)
         prev = fake_head
+        left = head
 
-        while right:
-            if left.val == right.val:
-                prev = left
-                left = right.next
-                if not left:
-                    break
-                right = left.next
+        while left:
+            if left.next and left.val == left.next.val:
+                same = left.val
+
+                while left and left.val == same:
+                    left = left.next
+
+                prev.next = left
 
             else:
-                if left.val != prev.val:
-                    left.next = None
-                    fake_head_add.next = left
-                    fake_head_add = fake_head_add.next
-
+                prev.next = left
                 prev = left
-                left = right
-                right = left.next
+                left = left.next
 
-        if left:
-            if left.val != prev.val:
-                left.next = None
-                fake_head_add.next = left
-                fake_head_add = fake_head_add.next
-
-        return self.linked_list_to_list(fake_head.next.next)
+        return self.linked_list_to_list(fake_head.next)
