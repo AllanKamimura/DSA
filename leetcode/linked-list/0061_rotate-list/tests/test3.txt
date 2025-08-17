@@ -1,0 +1,2 @@
+Input: head = [1], k = 0
+Output: [1]
