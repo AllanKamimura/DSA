@@ -51,6 +51,30 @@ left | right | equal
 return False
 ```
 
+Just as a sanity check, let's also test a list with an odd number of nodes.
+
+```python
+head = [1, 2, 3, 2, 1]
+```
+
+1. Find the middle node.
+
+slow | fast | switch
+---- | ---- | ------
+head | head | True
+1    | 1    | False
+1    | 2    | True
+2    | 3    | False
+2    | 2    | True
+3    | 1    | False
+3    | None | True
+
+```python
+reversed_head -> 1 -> 2 -> 3
+head -> 1 -> 2 -> 3 -> 2 -> 1 -> None
+```
+
+Yes, it is going to work.
 
 #### Time Complexity
 
