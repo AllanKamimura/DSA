@@ -1,0 +1,2 @@
+Input: head = [1,0,0]
+Output: false
