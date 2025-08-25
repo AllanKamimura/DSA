@@ -1,0 +1,2 @@
+Input: head = [5], left = 1, right = 1
+Output: [5]
