@@ -12,14 +12,19 @@ class Solution:
         return sum_
 
     def isHappy(self, n: int) -> bool:
-        fast = self.sum_of_squares(n)
-        slow = n
+        seen = set()
 
-        while not (fast == 1) and slow != fast:
-            fast = self.sum_of_squares(self.sum_of_squares(fast))
-            slow = self.sum_of_squares(slow)
+        curr_num = n
 
-        if fast == 1:
-            return True
-        else:
-            return False
+        while True:
+            curr_sum = self.sum_of_squares(curr_num)
+
+            if curr_sum == 1:
+                return True
+
+            if curr_sum in seen:
+                return False
+
+            seen.add(curr_sum)
+
+            curr_num = curr_sum

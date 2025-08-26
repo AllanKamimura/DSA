@@ -62,3 +62,20 @@ return False
 #### Space Complexity
 
 - O(1) -> In the worst case, we store 811 values in seen.
+
+### Cycle Detection with Fast and Slow
+
+We can use the fast/slow pointer approach to detect cycles.
+The faster pointer moves 2 steps at a time,
+while the slow pointer moves 1 step at a time.
+
+If there is a cycle,
+at some point, fast and slow would be at the same position.
+
+#### Time Complexity
+
+- O(1) -> In the worst case, it takes 811 elements to find a cycle.
+
+#### Space Complexity
+
+- O(1) -> In the worst case, we store 811 values in seen.
