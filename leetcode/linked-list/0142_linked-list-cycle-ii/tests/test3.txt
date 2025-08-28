@@ -1,0 +1,2 @@
+Input: head = [1,2,3], pos = 1
+Output: 1
