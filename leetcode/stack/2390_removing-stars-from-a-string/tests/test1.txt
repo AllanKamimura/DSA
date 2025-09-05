@@ -1,0 +1,2 @@
+Input: s = "leet**cod*e"
+Output: "lecoe"
