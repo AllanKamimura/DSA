@@ -1,0 +1,2 @@
+Input: s = " 3+5 / 2 "
+Output: 5
