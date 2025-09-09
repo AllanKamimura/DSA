@@ -55,8 +55,9 @@ return output = [-1, 3, -1]
 
 #### Time Complexity
 
-- O(n2) -> To create the lookup_table.
-- O(n1) -> To iterate over nums1 and get the output from lookup_table.
+- O(n1 + n2)
+  - O(n2) -> To create the lookup_table.
+  - O(n1) -> To iterate over nums1 and get the output from lookup_table.
 
 #### Space Complexity
 
@@ -108,10 +109,11 @@ return output = [-1, 3, -1]
 
 #### Time Complexity 2
 
-- O(n2) -> To create the lookup_table.
+- O(n1 + n2)
+  - O(n2) -> To create the lookup_table.
     - We add each value only 1 time to the stack.
     - In the while loop, we remove each element from the stack at most 1 time.
-- O(n1) -> To iterate over nums1 and get the output from lookup_table.
+  - O(n1) -> To iterate over nums1 and get the output from lookup_table.
 
 #### Space Complexity
 
