@@ -4,18 +4,27 @@
 
 ## Solution
 
+### Queue
+
 #### Explanation
 
-
+The idea is to use a queue to store the requests,
+when the current time exceeds 3000 + queue[0],
+we expire the request at queue[0].
 
 #### Manual Run
 
-
+ping | queue
+--- | ---
+1 | [1]
+100 | [1, 100]
+3001 | [1, 100, 3001]
+3002 | [100, 3001, 3002]
 
 #### Time Complexity
 
-- O(n) -> We transverse the array a single time.
+- O(n) -> Since we pop the first value in the list, all values are shifted to the left.
 
 #### Space Complexity
 
-- O(1) -> We only create integer variables.
+- O(1) -> The queue has at most 3000 elements.
