@@ -8,8 +8,10 @@
 
 #### Explanation
 
-The core idea is to use an increasing monotonic stack to keep track of the heights. 
-Each element is going to be a tuple of (index, height).
+The core idea is to use an increasing monotonic stack to keep track of the heights.
+Each element is going to be a tuple of (index, height),
+where the index marks the starting index of the rectangle with each height,
+so each element in the stack is a candidate rectangle.
 
 - If the new height is greater than the top of the stack,
 we append it. This means that we can extent the rectangle with height = "top of the stack" one width to the right.
@@ -26,6 +28,10 @@ this means we can't extent the rectangle with `height=2` to the right,
 but we can extend the rectangle with `height=1` to the left.
 - index = 2: since `heights[2]=5 > 1`,
 this means we can extent the rectangle with `height=1` to the right.
+
+The logic behind the "extend left" is,
+instead of using the current index,
+using the index of the popped element.
 
 #### Manual Run
 
