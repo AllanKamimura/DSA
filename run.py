@@ -6,11 +6,20 @@ import re
 import sys
 
 
-def find_problem_folder(problem_number):
+def find_problem_folder(problem_number, index=None):
     matches = glob.glob(f"leetcode/*/{problem_number}_*/")
+    matches.sort()
+    idx = 0
     if not matches:
         raise FileNotFoundError(f"No folder found for problem {problem_number}")
-    return matches[0]
+    if index is not None:
+        idx = int(index)
+        if idx < 0 or idx >= len(matches):
+            raise IndexError(
+                f"No folder found for problem {problem_number} at index {idx}"
+            )
+    print(f"Running {matches[idx]}")
+    return matches[idx]
 
 
 def load_solution_class(folder):
@@ -24,10 +33,15 @@ def load_solution_class(folder):
 def get_last_method(instance):
     # use last method
     # we can just "privatize" the other methods.
-    return [fn for fn in dir(instance) if not fn.startswith("__")][-1]
+    return [fn for fn in dir(instance) if not fn.startswith("__")][0]
 
 
 def parse_leetcode_style_file(filepath):
+    def fix_json_literals(s):
+        return (
+            s.replace("true", "True").replace("false", "False").replace("null", "None")
+        )
+
     with open(filepath, "r") as f:
         lines = f.readlines()
 
@@ -41,9 +55,11 @@ def parse_leetcode_style_file(filepath):
             pairs = re.split(r", (?=\w+ *=)", input_str)
             for pair in pairs:
                 name, val = pair.split("=", 1)
-                input_data[name.strip()] = eval(val.strip())
+                input_data[name.strip()] = eval(fix_json_literals(val.strip()))
         elif line.startswith("Output:"):
-            expected_output = eval(line.replace("Output:", "").strip())
+            expected_output = eval(
+                fix_json_literals(line.replace("Output:", "").strip())
+            )
 
     return input_data, expected_output
 
@@ -129,8 +145,8 @@ def run_datastructures_tests(folder):
     print(f"🔗 LeetCode Link: {leetcode_url}\n")
 
 
-def run_all_tests(problem_number):
-    folder = find_problem_folder(problem_number)
+def run_all_tests(problem_number, index=None):
+    folder = find_problem_folder(problem_number, index)
     # Special case for datastructures
     if os.path.normpath(folder).startswith(os.path.normpath("leetcode/datastructures")):
         run_datastructures_tests(folder)
@@ -181,7 +197,10 @@ def run_all_tests(problem_number):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python run.py <problem_number>")
+    if len(sys.argv) not in (2, 3):
+        print("Usage: python run.py <problem_number> [index]")
     else:
-        run_all_tests(sys.argv[1])
+        if len(sys.argv) == 2:
+            run_all_tests(sys.argv[1])
+        else:
+            run_all_tests(sys.argv[1], sys.argv[2])

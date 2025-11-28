@@ -1,0 +1,15 @@
+{
+	"Center dot": {
+	  "scope": "markdown",
+	  "prefix": "cdot",
+	  "body": ["⋅"],
+	  "description": "Insert center dot (U+22C5)"
+	},
+	"Right Arrow": {
+		"scope": "markdown",
+		"prefix": "rarrow",
+		"body": ["→"],
+		"description": "Insert center dot (U+2192)"
+	}
+  }
+  
