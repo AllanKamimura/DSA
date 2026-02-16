@@ -5,6 +5,8 @@ import os
 import re
 import sys
 
+import java_runner
+
 
 def find_problem_folder(problem_number):
     matches = glob.glob(f"leetcode/*/{problem_number}_*/")
@@ -129,17 +131,39 @@ def run_datastructures_tests(folder):
     print(f"🔗 LeetCode Link: {leetcode_url}\n")
 
 
-def run_all_tests(problem_number):
+def run_all_tests(problem_number, language="python"):
     folder = find_problem_folder(problem_number)
+    
+    # Validate language choice
+    if language not in ["python", "java"]:
+        print(f"❌ Unsupported language: {language}")
+        print("   Supported languages: python, java")
+        return
+    
+    # Check if the language file exists
+    lang_file = "main.py" if language == "python" else "Solution.java"
+    if not os.path.exists(os.path.join(folder, lang_file)):
+        print(f"❌ {lang_file} not found in {folder}")
+        return
+    
     # Special case for datastructures
     if os.path.normpath(folder).startswith(os.path.normpath("leetcode/datastructures")):
+        if language == "java":
+            print("❌ Java support for datastructures not yet implemented")
+            return
         run_datastructures_tests(folder)
         return
 
     tests_folder = os.path.join(folder, "tests")
-    solution = load_solution_class(folder)
-    method_name = get_last_method(solution)
-    method = getattr(solution, method_name)
+    
+    if language == "python":
+        solution = load_solution_class(folder)
+        method_name = get_last_method(solution)
+        method = getattr(solution, method_name)
+    else:  # java
+        # Compile Java file
+        if not java_runner.compile_solution(folder):
+            return
 
     input_files = sorted(glob.glob(os.path.join(tests_folder, "test*.txt")))
     if not input_files:
@@ -153,13 +177,19 @@ def run_all_tests(problem_number):
         case_id = os.path.basename(input_path).replace("input", "").replace(".txt", "")
         input_data, expected_output = parse_leetcode_style_file(input_path)
 
-        # deep copy inputs to preserve original data
-        test_args = {
-            k: v.copy() if isinstance(v, list) else v for k, v in input_data.items()
-        }
-
-        # default assumption: result is mutated input
-        result = method(**test_args)
+        if language == "python":
+            # deep copy inputs to preserve original data
+            test_args = {
+                k: v.copy() if isinstance(v, list) else v for k, v in input_data.items()
+            }
+            result = method(**test_args)
+        else:  # java
+            result = java_runner.run_test(folder, input_data)
+            if result is None:
+                print(f"❌ Test {case_id} failed to execute")
+                total += 1
+                continue
+        
         total += 1
         if result == expected_output:
             print(f"✅ Test {case_id} passed")
@@ -181,7 +211,10 @@ def run_all_tests(problem_number):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python run.py <problem_number>")
+    if len(sys.argv) < 2:
+        print("Usage: python run.py <problem_number> [language]")
+        print("  language: python (default) or java")
     else:
-        run_all_tests(sys.argv[1])
+        problem_number = sys.argv[1]
+        language = sys.argv[2] if len(sys.argv) > 2 else "python"
+        run_all_tests(problem_number, language)
