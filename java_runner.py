@@ -32,12 +32,11 @@ def compile_solution(folder):
 
 def run_test(folder, input_data):
     """Run Java solution with given input data"""
-    # Get the first parameter name and value
-    param_name = list(input_data.keys())[0]
-    param_value = input_data[param_name]
-    
-    # Determine parameter type and value string
-    param_type, value_str = get_param_type_and_value(param_value)
+    # Get all parameters
+    params = []
+    for param_name, param_value in input_data.items():
+        param_type, value_str = get_param_type_and_value(param_value)
+        params.append((param_name, param_type, value_str))
     
     # Detect the method name and class name from Java file
     method_name, class_name = detect_method_name(folder)
@@ -46,7 +45,7 @@ def run_test(folder, input_data):
         return None
     
     # Generate test runner code
-    runner_code = generate_runner_code(param_name, param_type, value_str, method_name, class_name)
+    runner_code = generate_runner_code(params, method_name, class_name)
     
     # Write runner to file
     runner_path = os.path.join(folder, "TestRunner.java")
@@ -157,13 +156,19 @@ def detect_method_name(folder):
         return None, "Solution"
 
 
-def generate_runner_code(param_name, param_type, value_str, method_name, class_name):
+def generate_runner_code(params, method_name, class_name):
     """Generate Java test runner code"""
+    # Generate variable declarations
+    declarations = "\n        ".join([f"{param_type} {param_name} = {value_str};" for param_name, param_type, value_str in params])
+    
+    # Generate method call arguments
+    method_args = ", ".join([param_name for param_name, _, _ in params])
+    
     return f"""public class TestRunner {{
     public static void main(String[] args) {{
         {class_name} solution = new {class_name}();
-        {param_type} {param_name} = {value_str};
-        Object result = solution.{method_name}({param_name});
+        {declarations}
+        Object result = solution.{method_name}({method_args});
         
         if (result == null) {{
             System.out.println("None");
